@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
         // answer >> skip >> a;
         // if (result == a) cout << "success" << endl;
         // else cout << a << " != " << result << endl;
-        delete inputs;
+        delete[] inputs;
         t++;
     }
     return 0;
