@@ -1,5 +1,4 @@
 #include<iostream>
-// #include<fstream>
 #include<vector>
 
 using namespace std;
@@ -50,9 +49,6 @@ int solve(int v, const int s, const int k) {
 }
 
 int main(int argc, char **argv) {
-    // ifstream cin("../input.txt");
-    // ifstream answer("../output.txt");
-
     int n, t = 1;
     cin >> n;
     for (int i = 0; i < n; i++) {
@@ -73,13 +69,6 @@ int main(int argc, char **argv) {
         cin >> skipws;
         cin >> k;
         cout << '#' << t << ' ' << solve(v, inputs.size(), k) << endl;
-
-        // int result = solve(v, inputs.size(), k);
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         t++;
     }
     return 0;

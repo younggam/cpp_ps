@@ -1,13 +1,9 @@
 #include<iostream>
-// #include<fstream>
 #include<vector>
 
 using namespace std;
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
-
     int T, t = 1;
     cin >> T;
     for (int i = 0; i < T; i++) {
@@ -22,7 +18,7 @@ int main(int argc, char **argv) {
             boxes[j] = a;
             cells[a] = j;
         }
-        // cout << '#' << t << ' ' << solve(v, inputs.size(), k) << endl;
+
         int max, b;
         bool nothing = true;
         vector<int> sequence;
@@ -60,12 +56,6 @@ int main(int argc, char **argv) {
             cout << endl;
         }
 
-        // int result = solve(v, inputs.size(), k);
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         t++;
         delete[] boxes;
         delete[] cells;

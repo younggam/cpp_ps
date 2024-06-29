@@ -1,5 +1,4 @@
 #include<iostream>
-#include<fstream>
 
 using namespace std;
 
@@ -17,8 +16,6 @@ int solve(const int *inputs, int n) {
 }
 
 int main(int argc, char **argv) {
-    ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
 
     int n, t = 1;
     while (cin >> n) {
@@ -28,12 +25,6 @@ int main(int argc, char **argv) {
         }
         cout << '#' << t << ' ' << solve(inputs, n) << endl;
 
-        // int result = solve(inputs, n);
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         delete[] inputs;
         t++;
     }
