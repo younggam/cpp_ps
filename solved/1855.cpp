@@ -1,6 +1,5 @@
 #include <cmath>
 #include <iostream>
-// #include <fstream>
 #include <queue>
 #include <vector>
 
@@ -68,9 +67,6 @@ public:
 
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
-
     int T, t = 1;
     cin >> T;
     for (int i = 0; i < T; i++) {
@@ -95,13 +91,6 @@ int main(int argc, char **argv) {
         }
         cout << '#' << t << ' ' << nodes[0].bfs(d, dn) << endl;
 
-        // int result = solve(v, inputs.size(), k);
-        // int result = nodes[0].bfs(d, dn);
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         t++;
         delete[] d;
         delete[] nodes;
