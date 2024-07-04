@@ -1,6 +1,5 @@
 #include <cmath>
 #include <iostream>
-// #include <fstream>
 #include <deque>
 
 using namespace std;
@@ -30,9 +29,6 @@ bool solve(deque<char> &S, deque<char> &E) {
 
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
-
     int T, t = 1;
     cin >> T;
     cin >> noskipws;
@@ -54,13 +50,6 @@ int main(int argc, char **argv) {
             else ys++;
         }
         cout << '#' << t << ' ' << (solve(S, E) ? "Yes" : "No") << endl;
-
-        // string result = solve(S, E) ? "Yes" : "No";
-        // string a;
-        // string skip;
-        // answer >> a;
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         t++;
     }
     return 0;
