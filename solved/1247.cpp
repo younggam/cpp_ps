@@ -1,6 +1,5 @@
 #include <cmath>
 #include <iostream>
-// #include <fstream>
 #include <set>
 #include <climits>
 
@@ -37,9 +36,6 @@ int solve(Node *nodes, const int n, set<Node *> &unused, Node *cur, Node *last, 
 
 
 int main(int argc, char **argv) {
-    // ifstream cin("../input.txt");
-    // ifstream answer("../output.txt");
-
     int T, t = 1;
     cin >> T;
     for (int i = 0; i < T; i++) {
@@ -59,13 +55,6 @@ int main(int argc, char **argv) {
         int min_d = INT_MAX;
         cout << '#' << t << ' ' << solve(nodes, n, unused, &nodes[0], &nodes[n - 1], 0, min_d) << endl;
 
-        // int result = solve(nodes, n, unused, &nodes[0], &nodes[n - 1], 0, min_d);
-        // int result = nodes[0].bfs(d, dn);
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         t++;
         delete[] nodes;
     }
