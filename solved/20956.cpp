@@ -51,18 +51,13 @@ int main(int argc, char **argv) {
     cin >> c;
     for (int i = 0; i < T; i++) {
         deque<char> S, E;
-        int xs = 0, ys = 0;
         while (cin >> c) {
             if (isspace(c)) break;
             S.push_back(c);
-            if (c == 'X') xs--;
-            else ys--;
         }
         while (cin >> c) {
             if (isspace(c)) break;
             E.push_back(c);
-            if (c == 'X') xs++;
-            else ys++;
         }
         bool r = false;
         solve(S, E, false, r);

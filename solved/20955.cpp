@@ -40,14 +40,10 @@ int main(int argc, char **argv) {
         while (cin >> c) {
             if (isspace(c)) break;
             S.push_back(c);
-            if (c == 'X') xs--;
-            else ys--;
         }
         while (cin >> c) {
             if (isspace(c)) break;
             E.push_back(c);
-            if (c == 'X') xs++;
-            else ys++;
         }
         cout << '#' << t << ' ' << (solve(S, E) ? "Yes" : "No") << endl;
         t++;

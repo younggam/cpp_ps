@@ -1,13 +1,10 @@
 #include <iostream>
-// #include <fstream>
 #include <climits>
 #include <set>
 
 using namespace std;
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
     ios::sync_with_stdio(false);
     cin.tie(0);
 
@@ -74,13 +71,3 @@ int main(int argc, char **argv) {
     }
     return 0;
 }
-
-// cout << '#' << t << ' ' << (r ? "Yes" : "No") << endl;
-
-// string result = r ? "Yes" : "No";
-// string a;
-// string skip;
-// answer >> skip >> a;
-// if (result == a) cout << "success" << endl;
-// else cout << a << " != " << result << endl;
-// t++;
