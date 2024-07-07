@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 #include <random>
 #include <vector>
 
@@ -40,9 +39,6 @@ void solve(int *input, int *array, int N, vector<int> &ops) {
 
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
-
     int T, t = 1;
     scanf("%d", &T);
     for (int i = 0; i < T; i++) {
@@ -79,11 +75,3 @@ int main(int argc, char **argv) {
     }
     return 0;
 }
-
-// cout << '#' << t << ' ' << min << endl;
-
-// short a;
-// string skip;
-// answer >> skip >> a;
-// if (min == a) cout << "success" << endl;
-// else cout << a << " != " << min << endl;
