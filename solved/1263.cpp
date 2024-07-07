@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 #include <climits>
 #include <queue>
 #include <vector>
@@ -37,9 +36,6 @@ void bfs(vector<short> *graph, short N, short start, int &min) {
 
 
 int main(int argc, char **argv) {
-    // ifstream cin("../input.txt");
-    // ifstream answer("../output.txt");
-
     int T, t = 1;
     cin >> T;
     for (int i = 0; i < T; i++) {
@@ -62,13 +58,6 @@ int main(int argc, char **argv) {
         }
 
         cout << '#' << t << ' ' << min << endl;
-
-        // short a;
-        // string skip;
-        // answer >> skip >> a;
-        // if (min == a) cout << "success" << endl;
-        // else cout << a << " != " << min << endl;
-
         t++;
         delete[] graph;
     }
