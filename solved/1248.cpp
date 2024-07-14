@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 
 using namespace std;
 
@@ -36,9 +35,6 @@ Node *solve(Node *nodes, int k0, int k1) {
 }
 
 int main(int argc, char **argv) {
-    // ifstream cin("../input.txt");
-    // ifstream answer("../output.txt");
-
     Node nodes[10000];
     for (int i = 0; i < 10000; i++) nodes[i].key = i;
 
@@ -64,14 +60,6 @@ int main(int argc, char **argv) {
         nodes[0].preorder();
         Node *result = solve(nodes, k0 - 1, k1 - 1);
         cout << '#' << t << ' ' << result->key + 1 << ' ' << result->preorder() << endl;
-
-        // int a, b;
-        // string skip;
-        // answer >> skip >> a >> b;
-        // if (result->key + 1 == a) cout << "success" << ',';
-        // else cout << a << " != " << result->key + 1 << ',';
-        // if (result->preorder() == b) cout << "success" << endl;
-        // else cout << b << " != " << result->preorder() << endl;
         t++;
     }
     return 0;
