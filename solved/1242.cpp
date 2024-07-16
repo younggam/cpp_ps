@@ -1,13 +1,9 @@
 #include <iostream>
-// #include <fstream>
 #include <vector>
 
 using namespace std;
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
-
     int T, t = 1;
     cin >> T;
     char inputs[2000][500];
@@ -113,13 +109,6 @@ int main(int argc, char **argv) {
             if (valid % 10 == 0) result += accum;
         }
         cout << '#' << t << ' ' << result << endl;
-
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // cout << '#' << t << ' ';
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         t++;
     }
     return 0;
