@@ -3,54 +3,35 @@
 
 using namespace std;
 
-int solve(float *cups, int k) {
-    for (int i = 0; i < k; i++) {
-        float c0 = cups[0];
-        float c1 = cups[1];
-        float c2 = cups[2];
-        cups[0] -= c0;
-        cups[1] += c0;
-
-        cups[1] -= c1;
-        cups[0] += c1 * 0.5f;
-        cups[2] += c1 * 0.5f;
-
-        cups[2] -= c2;
-        cups[1] += c2;
+int solve(int matrix[][64], int N) {
+    int ret = 0;
+    int *top = matrix[0];
+    for (int i = N - 1; i > 0; i--) {
+        if (ret % 2 == 0 && top[i] != i + 1 || ret % 2 == 1 && top[i] == i + 1) ret++;
     }
-    int ret = 2;
-    float max = cups[2];
-    if (max <= cups[1]) {
-        ret = 1;
-        max = cups[1];
-    }
-    if (max <= cups[0]) ret = 0;
     return ret;
 }
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
+    // ifstream cin("../1_sample_input.txt");
+    // ifstream answer("../1_sample_output.txt");
 
     int T, t = 1;
     cin >> T;
-    float cups[3];
+    int matrix[64][64];
     for (int i = 0; i < T; i++) {
-        for (int j = 0; j < 3; j++) {
-            char c;
-            cin >> c;
-            if (c == 'o') cups[j] = 1;
-            else cups[j] = 0;
+        int N;
+        cin >> N;
+        for (int j = 0; j < N; j++) {
+            for (int k = 0; k < N; k++) cin >> matrix[j][k];
         }
-        int k;
-        cin >> k;
-        int result = solve(cups, k);
+
+        int result = solve(matrix, N);
 
         cout << '#' << t << ' ' << result << endl;
 
         // int a;
-        // string skip;
-        // answer >> skip >> a;
+        // answer >> a;
         // cout << '#' << t << ' ';
         // if (result == a) cout << "success" << endl;
         // else cout << a << " != " << result << endl;
@@ -58,3 +39,10 @@ int main(int argc, char **argv) {
     }
     return 0;
 }
+
+// int a;
+// string skip;
+// answer >> skip >> a;
+// cout << '#' << t << ' ';
+// if (result == a) cout << "success" << endl;
+// else cout << a << " != " << result << endl;
