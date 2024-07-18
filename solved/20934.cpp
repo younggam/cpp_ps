@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 
 using namespace std;
 
@@ -29,9 +28,6 @@ int solve(float *cups, int k) {
 }
 
 int main(int argc, char **argv) {
-    // ifstream cin("../sample_input.txt");
-    // ifstream answer("../sample_output.txt");
-
     int T, t = 1;
     cin >> T;
     float cups[3];
@@ -45,15 +41,7 @@ int main(int argc, char **argv) {
         int k;
         cin >> k;
         int result = solve(cups, k);
-
         cout << '#' << t << ' ' << result << endl;
-
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // cout << '#' << t << ' ';
-        // if (result == a) cout << "success" << endl;
-        // else cout << a << " != " << result << endl;
         t++;
     }
     return 0;
