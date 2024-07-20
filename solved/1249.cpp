@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 
 using namespace std;
 
@@ -41,9 +40,6 @@ void dynamic(char matrix[][100], int d[][100], const int N, const int i, const i
 }
 
 int main(int argc, char **argv) {
-    // freopen("../input.txt", "r",stdin);
-    // ifstream answer("../output.txt");
-
     int T, t = 1;
     scanf("%d", &T);
     char matrix[100][100];
@@ -61,15 +57,7 @@ int main(int argc, char **argv) {
 
         d[0][0] = 0;
         dynamic(matrix, d, N, 0, 0);
-
-        // printf("#%d %d\n", t, d[N - 1][N - 1]);
-
-        int a;
-        string skip;
-        answer >> skip >> a;
-        printf("#%d ", t);
-        if (d[N - 1][N - 1] == a) printf("success\n");
-        else printf("%d != %d\n", a, d[N - 1][N - 1]);
+        printf("#%d %d\n", t, d[N - 1][N - 1]);
         t++;
     }
     return 0;
