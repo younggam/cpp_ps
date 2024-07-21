@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 
 using namespace std;
 
@@ -24,9 +23,6 @@ int solve(int *inputs, const int N, const int K) {
 }
 
 int main(int argc, char **argv) {
-    // freopen("../sin.txt", "r", stdin);
-    // ifstream answer("../sout.txt");
-
     int T, t = 1;
     scanf("%d", &T);
     int inputs[50];
@@ -38,15 +34,7 @@ int main(int argc, char **argv) {
         }
         sort(inputs, N);
         int result = solve(inputs, N, K);
-
         printf("#%d %d\n", t, result);
-
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // printf("#%d ", t);
-        // if (a == result) printf("success\n");
-        // else printf("%d != %d\n", a, result);
         t++;
     }
     return 0;
