@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 
 using namespace std;
 
@@ -48,9 +47,6 @@ void solve(MeetInfo meetInfos[], char meetCounts[], bool meets[], const int K, c
 }
 
 int main(int argc, char **argv) {
-    // freopen("../2_sample_input.txt", "r", stdin);
-    // ifstream answer("../2_sample_output.txt");
-
     int T, t = 1;
     scanf("%d", &T);
     char inputs[5], meetCounts[5];
@@ -69,7 +65,6 @@ int main(int argc, char **argv) {
         }
         int min = 10, max = 0;
         for (int j = 0; j < N; j++) {
-            // printf("%d\n", meetCounts[j]);
             if (min > meetCounts[j]) min = meetCounts[j];
             if (max < meetCounts[j]) max = meetCounts[j];
         }
@@ -77,18 +72,6 @@ int main(int argc, char **argv) {
         if (max == 0) max++;
 
         printf("%d %d\n", min, max);
-
-        // printf("#%d ", t);
-        // int a;
-        // string skip;
-        // answer >> skip >> a;
-        // answer >> a;
-        // if (a == min) printf("success ");
-        // else printf("%d != %d ", a, min);
-        // answer >> a;
-        // if (a == max) printf("success\n");
-        // else printf("%d != %d\n", a, max);
-        // t++;
     }
     return 0;
 }
