@@ -1,4 +1,3 @@
-#include <iostream>
 #include <cstring>
 
 using namespace std;
@@ -48,43 +47,4 @@ int query(int buffer_size, char *buf) {
         cur = child;
     }
     return i == buffer_size ? cur->stack : 0;
-}
-
-int main(void) {
-    freopen("../sample_input.txt", "r", stdin);
-    int TestCase;
-    for (scanf("%d", &TestCase); TestCase--;) {
-        int Query_N;
-        scanf("%d", &Query_N);
-
-        init();
-
-        static int tc = 0;
-        printf("#%d", ++tc);
-
-        for (int i = 1; i <= Query_N; i++) {
-            int type;
-            scanf("%d", &type);
-
-            if (type == 1) {
-                char buf[15] = {};
-                scanf("%s", buf);
-
-                int buffer_size = 0;
-                while (buf[buffer_size]) buffer_size++;
-
-                insert(buffer_size, buf);
-            } else {
-                char buf[15] = {};
-                scanf("%s", buf);
-
-                int buffer_size = 0;
-                while (buf[buffer_size]) buffer_size++;
-
-                printf(" %d", query(buffer_size, buf));
-            }
-        }
-        printf("\n");
-        fflush(stdout);
-    }
 }
