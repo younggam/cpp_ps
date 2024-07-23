@@ -8,7 +8,7 @@ public:
     int stack;
 };
 
-Node pool[500000];
+Node pool[250000];
 int k;
 
 void init() {
@@ -17,23 +17,21 @@ void init() {
 }
 
 void insert(int buffer_size, char *buf) {
-    Node *cur = &pool[0];
+    int cur = 0;
     char i = *buf;
     while (i != '\0') {
-        auto id = cur->children[i - 'a'];
+        auto id = pool[cur].children[i - 'a'];
         if (id == 0) break;
-        auto child = &pool[id];
-        child->stack += 1;
-        cur = child;
+        pool[id].stack += 1;
+        cur = id;
         buf++;
         i = *buf;
     }
     while (i != '\0') {
-        auto node = &pool[k];
-        memset(node->children, 0, sizeof(int) * 26);
-        node->stack = 1;
-        cur->children[i - 'a'] = k;
-        cur = node;
+        memset(pool[k].children, 0, sizeof(int) * 26);
+        pool[k].stack = 1;
+        pool[cur].children[i - 'a'] = k;
+        cur = k;
         k += 1;
         buf++;
         i = *buf;
@@ -41,15 +39,14 @@ void insert(int buffer_size, char *buf) {
 }
 
 int query(int buffer_size, char *buf) {
-    Node *cur = &pool[0];
+    int cur = 0;
     char i = *buf;
     while (i != '\0') {
-        auto id = cur->children[i - 'a'];
+        auto id = pool[cur].children[i - 'a'];
         if (id == 0) break;
-        auto child = &pool[id];
-        cur = child;
+        cur = id;
         buf++;
         i = *buf;
     }
-    return i == '\0' ? cur->stack : 0;
+    return i == '\0' ? pool[cur].stack : 0;
 }
