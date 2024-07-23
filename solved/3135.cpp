@@ -4,47 +4,52 @@ using namespace std;
 
 class Node {
 public:
+    int children[26];
     int stack;
-    Node *children[26] = {nullptr};
 };
 
-Node root;
-Node pool[1000000];
+Node pool[500000];
 int k;
 
 void init() {
-    memset(pool, 0, sizeof(Node) * k);
-    memset(root.children, 0, sizeof root.children);
-    k = 0;
+    memset(pool[0].children, 0, sizeof(int) * 26);
+    k = 1;
 }
 
 void insert(int buffer_size, char *buf) {
-    Node *cur = &root;
-    int i = 0;
-    while (i < buffer_size) {
-        auto child = cur->children[buf[i] - 'a'];
-        if (child == nullptr) break;
+    Node *cur = &pool[0];
+    char i = *buf;
+    while (i != '\0') {
+        auto id = cur->children[i - 'a'];
+        if (id == 0) break;
+        auto child = &pool[id];
         child->stack += 1;
-        i++;
         cur = child;
+        buf++;
+        i = *buf;
     }
-    for (; i < buffer_size; i++) {
+    while (i != '\0') {
         auto node = &pool[k];
+        memset(node->children, 0, sizeof(int) * 26);
         node->stack = 1;
-        cur->children[buf[i] - 'a'] = node;
+        cur->children[i - 'a'] = k;
         cur = node;
         k += 1;
+        buf++;
+        i = *buf;
     }
 }
 
 int query(int buffer_size, char *buf) {
-    Node *cur = &root;
-    int i = 0;
-    while (i < buffer_size) {
-        auto child = cur->children[buf[i] - 'a'];
-        if (child == nullptr) break;
-        i++;
+    Node *cur = &pool[0];
+    char i = *buf;
+    while (i != '\0') {
+        auto id = cur->children[i - 'a'];
+        if (id == 0) break;
+        auto child = &pool[id];
         cur = child;
+        buf++;
+        i = *buf;
     }
-    return i == buffer_size ? cur->stack : 0;
+    return i == '\0' ? cur->stack : 0;
 }
