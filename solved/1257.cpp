@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 
 using namespace std;
 
@@ -69,9 +68,6 @@ void solve(Node *root, char *str) {
 }
 
 int main(int argc, char **argv) {
-    // freopen("../input.txt", "r", stdin);
-    // ifstream answer("../output.txt");
-
     int T, t = 1;
     scanf("%d", &T);
     char str[401], output[401];
@@ -91,14 +87,6 @@ int main(int argc, char **argv) {
 
         printf("#%d ", t);
         printf("%s\n", output);
-        // string a;
-        // string skip;
-        // answer >> skip >> a;
-        // if (a == min) printf("success ");
-        // else printf("%d != %d ", a, min);
-        // answer >> a;
-        // if (a == output) printf("success\n");
-        // else printf("%s != %s\n", a.c_str(), output);
         t++;
         root.free();
     }
