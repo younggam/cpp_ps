@@ -5,22 +5,24 @@ using namespace std;
 class Node {
 public:
     int stack = 1;
-    Node *children[26] = {nullptr};
+    int children[26] = {};
 
     bool put(char *str) {
         char toAdd = *str;
         if (toAdd == '\0') return false;
         toAdd -= 'a';
 
-        Node *child;
+        int child = children[toAdd];
         bool created = false;
-        if (children[toAdd] == nullptr) {
-            child = new Node;
+        if (child == 0) {
+            child = index++;
             children[toAdd] = child;
+            pool[child].stack = 1;
+            fill_n(pool[child].children, 26, 0);
             created = true;
-        } else child = children[toAdd];
+        }
 
-        created |= child->put(str + 1);
+        created |= pool[child].put(str + 1);
         if (created) stack += 1;
         return created;
     }
@@ -31,36 +33,32 @@ public:
             return;
         }
         for (char i = 0; i < 26; i++) {
-            auto child = children[i];
-            if (child == nullptr) continue;
-            if (k > child->stack) k -= child->stack;
+            int child = children[i];
+            if (child == 0) continue;
+            if (k > pool[child].stack) k -= pool[child].stack;
             else {
                 *output = i + 'a';
-                child->find_kth(k - 1, output + 1);
+                pool[child].find_kth(k - 1, output + 1);
                 break;
             }
         }
     }
 
-    void free() {
-        for (char i = 0; i < 26; i++) {
-            auto child = children[i];
-            if (child == nullptr) continue;
-            child->free();
-            children[i] = nullptr;
-            delete child;
-        }
-    }
+    static Node pool[80201];
+    static int index;
 };
 
-void solve(Node *root, char *str) {
+Node Node::pool[80201] = {};
+int Node::index = 0;
+
+void solve(char *str) {
     while (*str != '\0') {
         auto substr = str;
         while (*substr != '\0') {
             substr++;
             char c = *substr;
             *substr = '\0';
-            root->put(str);
+            Node::pool[0].put(str);
             *substr = c;
         }
         str++;
@@ -71,24 +69,25 @@ int main(int argc, char **argv) {
     int T, t = 1;
     scanf("%d", &T);
     char str[401], output[401];
-    Node root{0};
     for (int i = 0; i < T; i++) {
         int K;
         scanf("%d", &K);
         scanf("%s", &str);
-        solve(&root, str);
-        if (K > root.stack) {
+        Node::index = 0;
+        Node::pool[0].stack = 0;
+        fill_n(Node::pool[0].children, 26, 0);
+        solve(str);
+        if (K > Node::pool[0].stack) {
             output[0] = 'n';
             output[1] = 'o';
             output[2] = 'n';
             output[3] = 'e';
             output[4] = '\0';
-        } else root.find_kth(K, output);
+        } else Node::pool[0].find_kth(K, output);
 
         printf("#%d ", t);
         printf("%s\n", output);
         t++;
-        root.free();
     }
     return 0;
 }
