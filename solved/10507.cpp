@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <fstream>
 
 using namespace std;
 
@@ -21,20 +20,17 @@ int solve(Interval *intervals, const int K, const int P) {
         i++;
     }
     last = i - 1;
-    // printf("%d %d %d %d\n", first, last, used, result);
     int max = result;
 
     for (i = last; i < K - 1; i++) {
         Interval interval = intervals[i + 1];
         used -= interval.start - intervals[i].end - 1;
         result += interval.end - interval.start + 1;
-        // printf("%d %d %d %d\n", first, i + 1, used, result);
         while (used < 0 && first < i + 1) {
             interval = intervals[first];
             result -= interval.end - interval.start + 1;
             used += intervals[first + 1].start - interval.end - 1;
             first++;
-            // printf("%d %d %d %d\n", first, i + 1, used, result);
         }
         if (result > max) max = result;
     }
@@ -45,9 +41,6 @@ int solve(Interval *intervals, const int K, const int P) {
 Interval intervals[200000];
 
 int main(int argc, char **argv) {
-    // freopen("../input.txt", "r", stdin);
-    // ifstream answer("../output.txt");
-
     int T, t = 1;
     scanf("%d", &T);
     for (int i = 0; i < T; i++) {
@@ -69,12 +62,6 @@ int main(int argc, char **argv) {
         int result = solve(intervals, k + 1, P);
         printf("#%d ", t);
         printf("%d\n", result);
-
-        // int a;
-        // string b;
-        // answer >> b >> a;
-        // if (a == result) printf("success\n");
-        // else printf("%d != %d\n", a, result);
         t++;
     }
     return 0;
