@@ -58,8 +58,11 @@ int main(int argc, char **argv) {
             }
             prev = cur;
         }
+        k++;
+        intervals[k].start = 1000000;
+        intervals[k].end = 1000000;
 
-        int result = solve(intervals, k + 1, P);
+        int result = solve(intervals, k, P);
         printf("#%d ", t);
         printf("%d\n", result);
         t++;
