@@ -1,0 +1,60 @@
+get Z
+
+get A
+shl A 1
+or Z A
+
+get A
+shl A 2
+or Z A
+
+get A
+shl A 3
+or Z A
+
+get A
+shl A 4
+or Z A
+
+get A
+shl A 5
+or Z A
+
+get A
+shl A 6
+or Z A
+
+not Z
+
+mov A Z
+and A 1
+put A
+shr Z 1
+
+mov A Z
+and A 1
+put A
+shr Z 1
+
+mov A Z
+and A 1
+put A
+shr Z 1
+
+mov A Z
+and A 1
+put A
+shr Z 1
+
+mov A Z
+and A 1
+put A
+shr Z 1
+
+mov A Z
+and A 1
+put A
+shr Z 1
+
+and Z 1
+put Z
