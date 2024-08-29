@@ -2,23 +2,19 @@
 
 using namespace std;
 
-int N;
-int S[1000];
+int A, B;
 
 int main() {
-    scanf("%d", &N);
-    float M = 0;
-    for (int i = 0; i < N; i++) {
-        int s;
-        scanf("%d", &s);
-        S[i] = s;
-        M = M < s ? s : M;
-    }
-    float ans = 0;
-    for (int i = 0; i < N; i++) {
-        ans += S[i] / M;
-    }
-    printf("%f\n", ans / N * 100);
+    scanf("%d %d", &A, &B);
 
+    int a = A, b = B;
+    for (;;) {
+        int r = a % b;
+        if (r == 0) break;
+        a = b;
+        b = r;
+    }
+
+    printf("%d\n%d", b, A * B / b);
     return 0;
 }
