@@ -39,7 +39,7 @@ struct Result {
     short cost;
 
     bool operator<(const Result &rhs) const {
-        return cost < rhs.cost;
+        return cost < rhs.cost||(cost==rhs.cost&&id>rhs.id);
     }
 };
 
@@ -72,7 +72,7 @@ void dijkstra() {
 }
 
 void solve() {
-    if (!results.empty()) return;
+    results = priority_queue<Result>();
     for (auto &p: Products) {
         if (p.id == 0 || p.revenue < visited[p.dest])continue;
         results.push({p.id, (short) (p.revenue - visited[p.dest])});
@@ -100,10 +100,13 @@ int main() {
                 O = 0;
                 dijkstra();
                 break;
-            case 200:
+            case 200:{
                 short id, revenue, dest;
                 scanf("%hd %hd %hd", &id, &revenue, &dest);
-                Products.insert({id, revenue, dest});
+                Product p={id, revenue, dest};
+                Products.insert(p);
+                if (p.revenue >= visited[p.dest])results.push({p.id, (short) (p.revenue - visited[p.dest])});
+                }
                 break;
             case 300:
                 short d;
@@ -111,7 +114,6 @@ int main() {
                 Products.erase({d});
                 break;
             case 400: {
-                solve();
                 short best = -1;
                 while (!results.empty()) {
                     auto pick = results.top();
@@ -127,7 +129,6 @@ int main() {
             case 500:
                 scanf("%hd", &O);
                 dijkstra();
-                results = priority_queue<Result>();
                 solve();
                 break;
         }
