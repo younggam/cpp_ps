@@ -1,105 +1,102 @@
 #include <iostream>
 #include <vector>
+#include <map>
+#include <unordered_map>
 using namespace std;
 
-struct Node {
-    int p_id;
-    int id;
-    short color;
-    short max_depth;
-    vector<int> children;
+#define MAX 1000000000
+
+struct Susi{
+    int x;
+    size_t hash;
+    bool operator<(const Susi& rhs) const{
+        return x<rhs.x||(x==rhs.x&&hash<rhs.hash);
+    }
 };
 
-Node nodes[100001] = {};
-int roots[100000] = {};
-int root_len = 0;
-
-int traverse(const Node &node, char &r, char &o, char &y, char &g, char &b) {
-    int ret = 0;
-    for (auto &c: node.children) {
-        char cr = 0, co = 0, cy = 0, cg = 0, cb = 0;
-        ret += traverse(nodes[c], cr, co, cy, cg, cb);
-        r |= cr, o |= co, y |= cy, g |= cg, b |= cb;
+struct Customer{
+    int x;
+    size_t hash;
+    bool operator<(const Customer& rhs) const{
+        return hash<rhs.hash;
     }
-    switch (node.color) {
-        case 1:
-            r = 1;
-            break;
-        case 2:
-            o = 1;
-            break;
-        case 3:
-            y = 1;
-            break;
-        case 4:
-            g = 1;
-            break;
-        case 5:
-            b = 1;
-            break;
+    size_t operator()(const Customer& s) const noexcept
+    {
+        return hash;
     }
-    int temp = r + o + y + g + b;
-    ret += temp * temp;
-    return ret;
-}
+};
 
-void set_color(Node &node, short color) {
-    node.color = color;
-    for (auto &c: node.children)set_color(nodes[c], color);
+int L,Q,T=0,R;
+map<Susi,int> Susis;
+int susis_size=0;
+unordered_map<Customer,int,Customer> Customers;
+
+void turn(int T2){
+    if(Customers.empty()){
+        T=T2;
+        return;
+    }
+    int diff=T2-T;
+    Customer temp={};
+    for(auto susi=Susis.begin();susi!=Susis.end();){
+        int x=susi->first.x;
+        temp.hash=susi->first.hash;
+        auto found=Customers.find(temp);
+        if(found!=Customers.end()){
+            auto customer=found->first;
+            int from=(x+T)%L;
+            int to=(x+T2)%L;
+            if(diff<L&&(from<to&&customer.x>from&&customer.x<=to||from>to&&(customer.x>from||customer.x<=to))||diff>=L){
+                int decrement=min(susi->second,found->second);
+                susi->second-=decrement;
+                susis_size-=decrement;
+                found->second-=decrement;
+                if(found->second<=0) Customers.erase(found);
+                if(susi->second<=0){
+                    susi=Susis.erase(susi);
+                    continue;
+                }
+            }
+        }
+        ++susi;
+    }
+    T=T2;
 }
 
 int main() {
-    int Q;
-    scanf("%d", &Q);
-    for (int iq = 0; iq < Q; iq++) {
-        int cmd;
-        scanf("%d", &cmd);
-        int m_id, p_id;
-        short color, max_depth;
-        switch (cmd) {
-            case 100: {
-                scanf("%d %d %hd %hd", &m_id, &p_id, &color, &max_depth);
-                bool add = false;
-                if (p_id > 0) {
-                    int id = p_id;
-                    int depth = 1;
-                    for (;;) {
-                        auto &n = nodes[id];
-                        if (n.p_id == 0) {
-                            nodes[p_id].children.emplace_back(m_id);
-                            add = true;
-                            break;
-                        } else if (n.max_depth <= depth) {
-                            break;
-                        }
-                        id = n.p_id;
-                        depth++;
-                    }
-                } else {
-                    add = true;
-                    roots[root_len++] = m_id;
-                }
-                if (add) {
-                    nodes[m_id] = {p_id, m_id, color, max_depth};
-                }
+    scanf("%d %d",&L,&Q);
+    R=(MAX/L+1)*L;
+    for(int iq=0;iq<Q;iq++){
+        int cmd,t,x,n;
+        char name[31];
+        scanf("%d",&cmd);
+        switch(cmd){
+            case 100:{
+                Susi s={};
+                scanf("%d %d %s",&t,&x,name);
+                turn(t-1);
+                s.x=(x+R-t)%L;
+                susis_size+=1;
+                s.hash=hash<string>{}(string(name));
+                auto found=Susis.find(s);
+                if(found==Susis.end()) Susis.emplace(s,1);
+                else found->second+=1;
             }
             break;
-            case 200:
-                scanf("%d %hd", &m_id, &color);
-                set_color(nodes[m_id], color);
-                break;
-            case 300:
-                scanf("%d", &m_id);
-                printf("%hd\n", nodes[m_id].color);
-                break;
-            case 400:
-                int ans = 0;
-                for (int i = 0; i < root_len; i++) {
-                    char r = 0, o = 0, y = 0, g = 0, b = 0;
-                    ans += traverse(nodes[roots[i]], r, o, y, g, b);
-                }
-                printf("%d\n", ans);
-                break;
+            case 200:{
+                Customer customer={};
+                scanf("%d %d %s %d",&t,&customer.x,name,&n);
+                turn(t-1);
+                customer.hash=hash<string>{}(string(name));
+                Customers.emplace(customer,n);
+            }
+            break;
+            case 300:{
+                scanf("%d",&t);
+                turn(t);
+                printf("%d %d\n",Customers.size(),susis_size);
+            }
+            break;
         }
     }
     return 0;
