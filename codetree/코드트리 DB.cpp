@@ -51,10 +51,10 @@ int insert(char name[],int nval){
         }
         if(kvec[m]>nval)m--;
         kvec.emplace(kvec.begin()+m+1,nval);
-        int q=m/400;
+        int q=m/250;
         svec[q]+=nval;
-        for(int i=q+1;q*400<kvec.size();q++){
-            int d=kvec[i*400];
+        for(int i=q+1;i*250<kvec.size();i++){
+            int d=kvec[i*250];
             svec[i-1]-=d;
             svec[i]+=d;
         }
@@ -87,10 +87,10 @@ int del(char name[]){
             m=(l+r)/2;
         }
         kvec.erase(kvec.begin()+m);
-        int q=m/400;
+        int q=m/250;
         svec[q]-=ret;
-        for(int i=q+1;i*400<kvec.size()+1;i++){
-            int d=kvec[i*400-1];
+        for(int i=q+1;i*250<kvec.size()+1;i++){
+            int d=kvec[i*250-1];
             svec[i-1]+=d;
             svec[i]-=d;
         }
@@ -134,10 +134,10 @@ long long sum(int oval){
         }
         if(kvec[m]>oval)m--;
         long long ret=0;
-        for(int i=0;i<m/400;i++){
+        for(int i=0;i<m/250;i++){
             ret+=svec[i];
         }
-        for(int i=m/400*400;i<=m;i++) ret+=kvec[i];
+        for(int i=m/250*250;i<=m;i++) ret+=kvec[i];
         return ret;
     }
     else return 0;
